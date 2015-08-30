@@ -64,7 +64,7 @@ angular.module('me-lazyload', [])
             var obj = elements[key],
                 iElement = obj.iElement,
                 $scope = obj.$scope;
-            if(isVisible(iElement)){
+            if(isVisible(iElement) && iElement.attr('loaded')!=='true'){
                 iElement.attr('src', $scope.lazySrc);
             }
         });
@@ -78,6 +78,7 @@ angular.module('me-lazyload', [])
             uid = getUid($el);
 
         $el.css('opacity', 1);
+        $el.attr('loaded', 'true');
 
         if(elements.hasOwnProperty(uid)){
             delete elements[uid];
